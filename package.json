@@ -1,0 +1,27 @@
+{
+  "name": "ojs-components",
+  "version": "1.0.0",
+  "description": "Module with input type components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OrangutanJS/ojs-components.git"
+  },
+  "keywords": [
+    "ojs",
+    "orangutanjs",
+    "oComponents"
+  ],
+  "author": "Maciek Swiechowicz and Kacper Stodolak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OrangutanJS/ojs-components/issues"
+  },
+  "homepage": "https://github.com/OrangutanJS/ojs-components#readme",
+  "dependencies": {
+    "ojs-core": "^1.0.1"
+  }
+}
