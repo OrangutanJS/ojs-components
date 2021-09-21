@@ -1,5 +1,5 @@
-//TODO: add subType feature
 import o from "ojs-core";
+import "./input.css";
 
 class Input {
     constructor(configObj) {
