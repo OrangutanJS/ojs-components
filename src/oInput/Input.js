@@ -1,9 +1,8 @@
-import o from "ojs-core";
-import "./input.css";
+import o from 'ojs-core';
+import './input.css';
 
 class Input {
     constructor(configObj) {
-
         this.defaultConfig = {
             label: '',
             type: 'text',
@@ -15,29 +14,28 @@ class Input {
                 {
                     name: 'change',
                     fn: e => {
-                        let val = e.target.value.trim();
+                        const val = e.target.value.trim();
                         if (this.db[this.name] instanceof Array) {
                             return this.db[e.target.name][this.index] = val;
-                        }else {
-                            return this.db[e.target.name] = val;
                         }
-                    }
+                        return this.db[e.target.name] = val;
+                    },
                 },
                 {
                     name: 'keyup',
-                    fn: e => {
+                    fn: () => {
                         // if (!this.spanValidInfo.classList.contains('hidden') && this.spanLabel.classList.contains('hidden')){
                         //     this.spanValidInfo.classList.add('hidden');
                         //     this.spanLabel.classList.remove('hidden');
                         // }
-                    }
+                    },
                 },
                 {
                     name: 'focusin',
                     fn: e => {
                         e.target.value = e.target.value.trim();
                         e.target.select();
-                    }
+                    },
                 },
                 {
                     name: 'focusout',
@@ -50,38 +48,37 @@ class Input {
                         if (e.target.value.trim().length > 0) {
                             return e.target.value = e.target.value.trim();
                         }
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         };
         if (configObj.event) {
             this.configObj = {
                 ...this.defaultConfig,
                 ...{
                     ...configObj,
-                    event: [ ...configObj.event, ...this.defaultConfig.event ]
-                }
+                    event: [...configObj.event, ...this.defaultConfig.event],
+                },
             };
-        }else {
+        } else {
             this.configObj = {
                 ...this.defaultConfig,
-                ...configObj
+                ...configObj,
             };
         }
 
         this.labels = {
-            color:      'Pole wyboru kolorów',
-            date:       'Pole data',
-            email:      'Pole adres e-mail',
-            month:	    'Pole data (miesiąc)',
-            number:	    'Pole typu numer',
-            password:   'Pole typu hasło',
-            tel:        'Pole numer telefonu',
-            text:       'Pole typu tekst',
-            time:       'Pole typu czas',
-            url:	    'Pole adres URL',
-        }
-
+            color: 'Pole wyboru kolorów',
+            date: 'Pole data',
+            email: 'Pole adres e-mail',
+            month:	'Pole data (miesiąc)',
+            number:	'Pole typu numer',
+            password: 'Pole typu hasło',
+            tel: 'Pole numer telefonu',
+            text: 'Pole typu tekst',
+            time: 'Pole typu czas',
+            url:	'Pole adres URL',
+        };
 
         this.db = this.configObj.db;
         this.unit = '';
@@ -94,13 +91,12 @@ class Input {
         this.required = this.configObj.required;
         this.event = this.configObj.event;
 
-
         this.createNodes();
         this.attrAppender();
         this.setStore();
     }
 
-    createNodes(){
+    createNodes() {
         this.inputBox = o('div');
         this.pLabel = o('p');
         this.spanLabel = o('span');
@@ -114,29 +110,28 @@ class Input {
         this.pLabel.text(this.configObj.label);
         this.spanLabel.text(this.labels[this.type]);
         this.spanValidInfo
-        .text(this.configObj.customValidInfo ? this.configObj.customValidInfo : 'Niepoprawne dane')
-        .class([ 'text-warning', 'hidden' ]);
+            .text(this.configObj.customValidInfo ? this.configObj.customValidInfo : 'Niepoprawne dane').class(['text-warning', 'hidden']);
         this.input
-        .id(this.idDOM)
-        .class('input__field')
-        .event(this.event)
-        .attr([
-            {
-                name: 'type',
-                val : this.type
-            },
-            {
-                name: 'name',
-                val : this.name
-            },
-            {
-                name: 'placeholder',
-                val : this.placeholder
-            },
-        ]);
+            .id(this.idDOM)
+            .class('input__field')
+            .event(this.event)
+            .attr([
+                {
+                    name: 'type',
+                    val: this.type,
+                },
+                {
+                    name: 'name',
+                    val: this.name,
+                },
+                {
+                    name: 'placeholder',
+                    val: this.placeholder,
+                },
+            ]);
         this.labelEl
-        .for(this.idDOM)
-        .class('input__label')
+            .for(this.idDOM)
+            .class('input__label');
 
         if (this.required) {
             this.input.setAttribute('required', this.required);
@@ -146,13 +141,13 @@ class Input {
         }
     }
 
-    setStore(){
-        if (typeof(this.db[this.name]) == 'number') {
+    setStore() {
+        if (typeof (this.db[this.name]) === 'number') {
             this.db[this.name] = String(this.db[this.name]);
         }
         let val = this.db[this.name].trim();
-        if (this.db && this.db[this.name] && this.db[this.name].length > 0){
-            if (this.db[this.name] instanceof Array){
+        if (this.db && this.db[this.name] && this.db[this.name].length > 0) {
+            if (this.db[this.name] instanceof Array) {
                 val = this.index ? this.db[this.name][this.index].trim() : '';
             }
             this.input.element.value = val;
@@ -173,14 +168,14 @@ class Input {
         return this;
     }
 
-    init(){
+    init() {
         return this.inputBox.add([
             this.labelEl.add([
                 this.pLabel.init(),
                 this.spanLabel.init(),
-                this.spanValidInfo.init()
+                this.spanValidInfo.init(),
             ]).init(),
-            this.input.init()
+            this.input.init(),
         ]).init();
     }
 

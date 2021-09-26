@@ -1,4 +1,4 @@
-import App from "./views/App";
+import App from './views/App';
 
 const app = new App();
 document.body.appendChild(app.init());
