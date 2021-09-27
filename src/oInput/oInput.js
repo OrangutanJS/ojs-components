@@ -1,18 +1,17 @@
-import o from 'ojs-core';
 import mapEvents from '../utils/eventMapper';
 import './input.css';
+import o from 'ojs-core';
 
-const LABELS = {
-    text: 'Pole typu tekst',
-    date: 'Pole daty',
-    email: 'Pole adres e-mail',
-    month: 'Pole daty (miesiąc)',
-    range: 'Pole typu suwak',
-    number: 'Pole typu numer',
-    password: 'Pole typu hasło',
-    tel: 'Pole numer telefonu',
-    file: 'Pole typu plik',
-    url: 'Pole adres URL',
+const TYPES = {
+    text: 'Text field',
+    date: 'Date field',
+    email: 'E-mail field',
+    month: 'Month field',
+    number: 'Number field',
+    password: 'Password field',
+    tel: 'Tel field',
+    file: 'File field',
+    url: 'URL field',
 };
 
 class oInput {
@@ -20,17 +19,20 @@ class oInput {
         this.store = {
             label: '',
             type: 'text',
+            typeText: false,
             placeholder: '',
             required: true,
             index: false,
+            labelClass: 'input__label',
+            labelStyle: false,
+            inputClass: 'input__field',
+            inputStyle: false,
             attributes: [],
         };
 
         this.configMerge(config);
         this.store.events = this.events(config);
         this.store.id = config.id ? `${config.id}--input` : `${new Date().getTime()}${Math.floor(Math.random() * 100)}--input`;
-
-        console.log(this.store);
     }
 
     configMerge(config) {
@@ -59,17 +61,26 @@ class oInput {
 
     build() {
         const {
-            attributes, db, id, index, label, name, placeholder, type,
+            attributes, labelClass, db, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, type, typeText,
         } = this.store;
         const value = index ? db[name][index] : db[name];
+        let typeTextSpan = false;
+        if (typeText && TYPES[type]) {
+            typeTextSpan = typeof typeText === 'boolean' ? o('span').text(TYPES[type]).init() : o('span').text(typeText).init();
+        }
 
-        return o('label').class('input__label').id(id)
+        return o('label')
+            .class(!labelStyle && labelClass)
+            .style(labelStyle && labelStyle)
+            .id(id)
             .add([
                 o('p').text(label).init(),
-                o('span').text(LABELS[type]).init(),
+                typeText && typeTextSpan,
                 o('input')
-                    .class('input__field')
-                    .value(value).type(type)
+                    .class(!inputStyle && inputClass)
+                    .style(inputStyle && inputStyle)
+                    .value(value)
+                    .type(type)
                     .name(name)
                     .attr(attributes)
                     .placeholder(placeholder)
