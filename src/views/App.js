@@ -19,8 +19,15 @@ class App extends oView {
             label: 'Testujemy',
             name: 'name',
             db: this.store,
-            typeText: true,
+            typeSpanText: true,
+            events: [{
+                name: 'change',
+                fn: () => {
+                    console.log('change from events');
+                },
+            }],
             change: () => this.rerender(),
+            input: () => console.log('input'),
         });
     }
 

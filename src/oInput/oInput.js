@@ -1,6 +1,7 @@
 import mapEvents from '../utils/eventMapper';
 import './input.css';
 import o from 'ojs-core';
+import generateRandomHash from '../utils/generateRandomHash';
 
 const TYPES = {
     text: 'Text field',
@@ -19,7 +20,7 @@ class oInput {
         this.store = {
             label: '',
             type: 'text',
-            typeText: false,
+            typeSpanText: false,
             placeholder: '',
             required: true,
             index: false,
@@ -31,18 +32,17 @@ class oInput {
         };
 
         this.configMerge(config);
-        this.store.events = this.events(config);
-        this.store.id = config.id ? `${config.id}--input` : `${new Date().getTime()}${Math.floor(Math.random() * 100)}--input`;
+        this.store.id = config.id ? `${config.id}--input` : `${generateRandomHash()}--input`;
     }
 
     configMerge(config) {
         Object.assign(this.store, config);
         if (config.events) {
-            this.store.events = [...config.events, { ...this.events().change }];
+            this.store.events = [...config.events, ...this.concatEvents(config)];
         }
     }
 
-    events(config) {
+    concatEvents(config) {
         const defaultEvents = [
             {
                 name: 'change',
@@ -61,12 +61,12 @@ class oInput {
 
     build() {
         const {
-            attributes, labelClass, db, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, type, typeText,
+            attributes, labelClass, db, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, type, typeSpanText,
         } = this.store;
         const value = index ? db[name][index] : db[name];
-        let typeTextSpan = false;
-        if (typeText && TYPES[type]) {
-            typeTextSpan = typeof typeText === 'boolean' ? o('span').text(TYPES[type]).init() : o('span').text(typeText).init();
+        let typeSpanTextHTML = false;
+        if (typeSpanText && TYPES[type]) {
+            typeSpanTextHTML = typeof typeSpanText === 'boolean' ? o('span').text(TYPES[type]).init() : o('span').text(typeSpanText).init();
         }
 
         return o('label')
@@ -75,7 +75,7 @@ class oInput {
             .id(id)
             .add([
                 o('p').text(label).init(),
-                typeText && typeTextSpan,
+                typeSpanText && typeSpanTextHTML,
                 o('input')
                     .class(!inputStyle && inputClass)
                     .style(inputStyle && inputStyle)
