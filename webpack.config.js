@@ -28,21 +28,21 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            }
-        ]
+                        presets: ['@babel/preset-env'],
+                    },
+                },
+            },
+        ],
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css'
+            filename: 'css/[name].css',
         }),
         new HtmlWebpackPlugin({
             title: 'oComponents',
             base: 'http://localhost:9000/',
             hash: true,
-            filename: './index.html'
-        })
-    ]
+            filename: './index.html',
+        }),
+    ],
 };
