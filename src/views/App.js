@@ -25,7 +25,7 @@ class App extends oView {
                 name: 'change',
                 fn: () => {
                     console.log('change from events');
-                    this.oButton.enabled();
+                    this.oButtonPrimary.enabled();
                 },
             }],
             // change: () => this.rerender(),
