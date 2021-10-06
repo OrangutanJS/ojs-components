@@ -1,7 +1,7 @@
-import mapEvents from '../utils/eventMapper';
-import './input.css';
 import o from 'ojs-core';
-import generateRandomHash from '../utils/generateRandomHash';
+import mapEvents from '../../utils/eventMapper';
+import generateRandomHash from '../../utils/generateRandomHash';
+import './input.css';
 
 const TYPES = {
     text: 'Text field',
@@ -21,24 +21,27 @@ class oInput {
             label: '',
             type: 'text',
             typeSpanText: false,
+            disabled: false,
             placeholder: '',
             required: true,
             index: false,
-            labelClass: 'input__label',
+            labelClass: 'ojsInput__label',
             labelStyle: false,
-            inputClass: 'input__field',
+            inputClass: 'ojsInput__field',
             inputStyle: false,
             attributes: [],
         };
 
-        this.configMerge(config);
-        this.store.id = config.id ? `${config.id}--input` : `${generateRandomHash()}--input`;
+        this.mergeConfig(config);
+        this.store.id = config.id ? `${config.id}--ojsInput` : `${generateRandomHash()}--ojsInput`;
     }
 
-    configMerge(config) {
+    mergeConfig(config) {
         Object.assign(this.store, config);
         if (config.events) {
             this.store.events = [...config.events, ...this.concatEvents(config)];
+        } else {
+            this.store.events = this.concatEvents(config);
         }
     }
 
@@ -61,7 +64,7 @@ class oInput {
 
     build() {
         const {
-            attributes, labelClass, db, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, type, typeSpanText,
+            attributes, labelClass, db, disabled, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, type, typeSpanText,
         } = this.store;
         const value = index ? db[name][index] : db[name];
         let typeSpanTextHTML = false;
@@ -69,25 +72,30 @@ class oInput {
             typeSpanTextHTML = typeof typeSpanText === 'boolean' ? o('span').text(TYPES[type]).init() : o('span').text(typeSpanText).init();
         }
 
-        return o('label')
+        const oInputElement = o('input')
+            .class(!inputStyle && inputClass)
+            .disabled(disabled)
+            .value(value)
+            .type(type)
+            .attr(attributes)
+            .event(this.store.events);
+
+        if (inputStyle) oInputElement.style(inputStyle);
+        if (placeholder) oInputElement.placeholder(placeholder);
+        if (name) oInputElement.name(name);
+
+        const oLabelElement = o('label')
             .class(!labelStyle && labelClass)
-            .style(labelStyle && labelStyle)
             .id(id)
             .add([
                 o('p').text(label).init(),
                 typeSpanText && typeSpanTextHTML,
-                o('input')
-                    .class(!inputStyle && inputClass)
-                    .style(inputStyle && inputStyle)
-                    .value(value)
-                    .type(type)
-                    .name(name)
-                    .attr(attributes)
-                    .placeholder(placeholder)
-                    .event(this.store.events)
-                    .init(),
-            ])
-            .init();
+                oInputElement.init(),
+            ]);
+
+        if (labelStyle) oLabelElement.style(labelStyle);
+
+        return oLabelElement.init();
     }
 
     init() {

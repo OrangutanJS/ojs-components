@@ -1,0 +1,122 @@
+.ojsButton {
+    padding: 1rem;
+    margin: 1rem 1rem 1rem 0;
+    font-weight: 700;
+    width: max-content;
+    min-width: max-content;
+    display: flex;
+    align-items: flex-end;
+    transition-duration: .2s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.ojsButton:disabled,
+.ojsButton[disabled]{
+    opacity: .65;
+    cursor: initial;
+}
+
+.ojsButton-primary {
+    background-color: #36a0c2;
+    border: 2px solid #36a0c2;
+    color: #fff;
+}
+.ojsButton-primary:hover:enabled {
+    color: #36a0c2;
+    background-color: #fff;
+}
+
+.ojsButton-primary {
+    background-color: #36a0c2;
+    border: 2px solid #36a0c2;
+    color: #fff;
+}
+.ojsButton-primary:hover:enabled {
+    color: #36a0c2;
+    background-color: #fff;
+}
+
+.ojsButton-secondary {
+    color: #36a0c2;
+    border: 2px solid #36a0c2;
+    background-color: #fff;
+}
+.ojsButton-secondary:hover:enabled {
+    background-color: #36a0c2;
+    border: 2px solid #36a0c2;
+    color: #fff;
+}
+
+.ojsButton-primary-confirm {
+    background-color: #78b636f5;
+    border: 2px solid #78b636f5;
+    color: #fff;
+}
+.ojsButton-primary-confirm:hover:enabled {
+    color: #78b636f5;
+    background-color: #fff;
+}
+
+.ojsButton-secondary-confirm {
+    color: #78b636f5;
+    border: 2px solid #78b636f5;
+    background-color: #fff;
+}
+.ojsButton-secondary-confirm:hover:enabled {
+    background-color: #78b636f5;
+    border: 2px solid #78b636f5;
+    color: #fff;
+}
+
+.ojsButton-primary-cancel {
+    background-color: #ec5160;
+    border: 2px solid #ec5160;
+    color: #fff;
+}
+.ojsButton-primary-cancel:hover:enabled {
+    color: #ec5160;
+    background-color: #fff;
+}
+
+.ojsButton-secondary-cancel {
+    color: #ec5160;
+    border: 2px solid #ec5160;
+    background-color: #fff;
+}
+.ojsButton-secondary-cancel:hover:enabled {
+    background-color: #ec5160;
+    border: 2px solid #ec5160;
+    color: #fff;
+}
+
+.ojsButton-link {
+    color: #36a0c2;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid #36a0c2;
+    padding-bottom: 10px;
+    background-color: #fff;
+}
+.ojsButton-link:hover:enabled {
+    color: #4cd3fc;
+    border-bottom: 2px solid #4cd3fc;
+}
+
+.ojsButton-link-confirm {
+    color: #78b636f5;
+    border-bottom: 2px solid #78b636f5;
+}
+.ojsButton-link-confirm:hover:enabled {
+    color: #91E23BF5;
+    border-bottom: 2px solid #91E23BF5;
+}
+
+.ojsButton-link-cancel {
+    color: #ec5160;
+    border-bottom: 2px solid #ec5160;
+}
+.ojsButton-link-cancel:hover:enabled {
+    color: #ff8995;
+    border-bottom: 2px solid #ff8995;
+}

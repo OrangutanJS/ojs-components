@@ -1,4 +1,4 @@
-const EVENTS_LIST = ['change', 'input', 'keyup', 'keypress', 'keydown', 'focus', 'focusin', 'focusout', 'blur'];
+const EVENTS_LIST = ['change', 'click', 'input', 'keyup', 'keypress', 'keydown', 'focus', 'focusin', 'focusout', 'blur'];
 
 function mapEvents(config = {}) {
     const attributes = Object.entries(config);
