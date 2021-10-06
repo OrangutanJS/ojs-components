@@ -2,6 +2,18 @@ import o, { oRef } from 'ojs-core';
 import mapEvents from '../../utils/eventMapper';
 import './button.css';
 
+const classNamesByTypeObject = {
+    primary: ' ojsButton-primary',
+    secondary: ' ojsButton-secondary',
+    'primary-confirm': ' ojsButton-primary-confirm',
+    'secondary-confirm': ' ojsButton-secondary-confirm',
+    'primary-cancel': ' ojsButton-primary-cancel',
+    'secondary-cancel': ' ojsButton-secondary-cancel',
+    link: ' ojsButton-link',
+    'link-confirm': '  ojsButton-link ojsButton-link-confirm',
+    'link-cancel': '  ojsButton-link ojsButton-link-cancel',
+};
+
 const buttonAttributesArray = store => [
     { name: 'type', val: store.submit ? 'submit' : 'button' },
     { name: 'name', val: store.name },
@@ -33,49 +45,9 @@ class oButton {
         }
     }
 
-    classNamesByType() {
+    addClassNamesByType() {
         if (this.store.style || this.store.classNames !== 'ojsButton') return;
-        switch (this.store.type) {
-        case 'primary': {
-            this.store.classNames += ' ojsButton-primary';
-            break;
-        }
-        case 'secondary': {
-            this.store.classNames += ' ojsButton-secondary';
-            break;
-        }
-        case 'primary-confirm': {
-            this.store.classNames += ' ojsButton-primary-confirm';
-            break;
-        }
-        case 'secondary-confirm': {
-            this.store.classNames += ' ojsButton-secondary-confirm';
-            break;
-        }
-        case 'primary-cancel': {
-            this.store.classNames += ' ojsButton-primary-cancel';
-            break;
-        }
-        case 'secondary-cancel': {
-            this.store.classNames += ' ojsButton-secondary-cancel';
-            break;
-        }
-        case 'link': {
-            this.store.classNames += ' ojsButton-link';
-            break;
-        }
-        case 'link-confirm': {
-            this.store.classNames += '  ojsButton-link ojsButton-link-confirm';
-            break;
-        }
-        case 'link-cancel': {
-            this.store.classNames += '  ojsButton-link ojsButton-link-cancel';
-            break;
-        }
-        default: {
-            break;
-        }
-        }
+        this.store.classNames += classNamesByTypeObject[this.store.type];
     }
 
     textToggle(text, nextText) {
@@ -92,7 +64,7 @@ class oButton {
     }
 
     build() {
-        this.classNamesByType();
+        this.addClassNamesByType();
         const {
             attributes, classNames, disabled, events, style, text,
         } = this.store;
