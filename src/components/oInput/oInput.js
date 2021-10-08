@@ -33,7 +33,7 @@ class oInput {
         };
 
         this.mergeConfig(config);
-        this.store.id = config.id ? `${config.id}--ojsInput` : `${generateRandomHash()}--ojsInput`;
+        this.store.id = config.id ? `${config.id}--ojsInput` : `ojsInput--${generateRandomHash()}`;
     }
 
     mergeConfig(config) {

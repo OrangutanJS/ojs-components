@@ -2,12 +2,14 @@ import oView from 'ojs-view';
 import o from 'ojs-core';
 import oInput from '../components/oInput/oInput';
 import oButton from '../components/oButton/oButton';
+import oSelect from '../components/oSelect/oSelect';
 
 class App extends oView {
     constructor() {
         super();
         this.store = {
             name: '',
+            fruit: '',
             array: [
                 'witam',
                 'dwa',
@@ -28,7 +30,7 @@ class App extends oView {
                     this.oButtonPrimary.enabled();
                 },
             }],
-            // change: () => this.rerender(),
+            change: () => this.rerender(),
             input: () => console.log('input'),
         });
 
@@ -74,6 +76,20 @@ class App extends oView {
             text: 'Link cancel',
             type: 'link-cancel',
         });
+
+        this.oSelect = new oSelect({
+            label: 'Twój ulubiony owoc',
+            name: 'fruit',
+            db: this.store,
+            change: () => {
+                console.log(this.store);
+                this.rerender();
+            },
+            options: [
+                { text: 'Jabłko', value: 'apple' },
+                { text: 'Gruszka', value: 'pear' },
+            ],
+        });
     }
 
     build() {
@@ -91,7 +107,9 @@ class App extends oView {
                 this.oButtonLinkConfirm.init(),
                 this.oButtonLinkCancel.init(),
             ]).init(),
+            this.oSelect.init(),
             o('p').text(this.store.name).init(),
+            o('p').text(`Ulubiony owoc: ${this.store.fruit}`).init(),
         ]).init();
     }
 }
