@@ -64,7 +64,7 @@ class oInput {
 
     build() {
         const {
-            attributes, labelClass, db, disabled, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, type, typeSpanText,
+            attributes, labelClass, db, disabled, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, required, type, typeSpanText,
         } = this.store;
         const value = index ? db[name][index] : db[name];
         let typeSpanTextHTML = false;
@@ -83,6 +83,7 @@ class oInput {
         if (inputStyle) oInputElement.style(inputStyle);
         if (placeholder) oInputElement.placeholder(placeholder);
         if (name) oInputElement.name(name);
+        if (required) oInputElement.attr({ required });
 
         const oLabelElement = o('label')
             .class(!labelStyle && labelClass)

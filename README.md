@@ -8,6 +8,9 @@ npm i ojs-components
 * oInput
 
 ```js
+// import 
+import { oInput } from 'ojs-components';
+
 // declaration
 const store = {
     example: ''
@@ -31,24 +34,27 @@ Value in the store object will be replaced everytime when input value changes. A
 
 | Property   |      description      | Type |
 |:------------:|:---------------------:|:------:|
-| label      | defines text above the input - label | string
-| type       | defined type of input: text, number, password etc. text is declared by default | string
-| db         | defined store object | object
-| name       | defined name that is declared in db | string
 | attributes | custom attributes to input. For example: [ { 'placeholder': 'exampleText' } ] | array
-| index | When name is array, we can define index of input value | string/number
-| disabled | defined input is disabled or no | boolean
-| required | defined input is required or no | boolean
-| placeholder | defined input placeholder | string
 | change / keyup / focus / blur etc. | fire event will run defined function | function
+| db         | defined store object | object
+| disabled | defined input is disabled or no | boolean
 | events | custom events. For example: [ { name: 'change', fn: () => {} } ] | array
-| labelClass | defined class name of label. "ojsInput__label" by default | string
+| index | When name is array, we can define index of input value | string/number
 | inputClass | defined class name of input. "ojsInput__input" by default | string
-| labelStyle | defined inline styles of label | string
 | inputStyle | defined inline styles of input | string
+| label      | defines text above the input - label | string
+| labelStyle | defined inline styles of label | string
+| labelClass | defined class name of label. "ojsInput__label" by default | string
+| name       | defined name that is declared in db | string
+| placeholder | defined input placeholder | string
+| required | defined input is required or no | boolean
+| type       | defined type of input: text, number, password etc. text is declared by default | string
 ---
 * oButton
 ```js
+// import
+import { oButton } from 'ojs-components';
+
 // declaration 
 const button = new oButton({
     text: 'Example button',
@@ -67,14 +73,14 @@ oButton like oInput need one argument: configObject. There are list of propertie
 
 | Property     |      description      | Type   |
 |:------------:|:---------------------:|:------:|
-| text         | defined button text   | string |
-| type         | there are few types: primary, secondary, primary-confirm, primary-cancel, secondary-confirm, secondary-cancel, link, link-confirm, link-cancel. There specified style of button   | string |
 | attributes   | custrom attributes. For example: [ { 'name': 'hello' } ] | array
 | classNames   | your custom classes for button | string
+| click and other events | run function while event happen | function
 | disabled     | defined if button is disabled  | boolean
 | style        | defined inline styles  | string
 | submit       | if true, button will be type submit. type is button by default | boolean
-| click and other events | run function while event happen | function
+| text         | defined button text   | string |
+| type         | there are few types: primary, secondary, primary-confirm, primary-cancel, secondary-confirm, secondary-cancel, link, link-confirm, link-cancel. There specified style of button   | string |
 
 We also have defined methods for use on our button component: 
 * textToggle
@@ -94,4 +100,67 @@ const button = new oButton({
 });
 
 // and enable when you want just by use: button.enabled()
+```
+---
+* oSelect
+```js
+// import
+import { oSelect } from 'ojs-components';
+
+// declaration 
+const store = {
+    fruit: ''
+}
+const select = new oSelect({
+    text: 'Your favourite fruit?',
+    type: 'primary',
+    name: 'fruit',
+    db: store,
+    options: [
+        { text: 'Apple', value: 'apple'}
+        { text: 'Pear', value: 'pear'}
+    ]
+});
+
+// use
+document.body.appendChild(
+    select.init()
+);
+```
+oSelect like others need one argument: configObject. There are list of properties:
+
+| Property   |      description      | Type |
+|:------------:|:---------------------:|:------:|
+| attributes | custom attributes to input. For example: [ { 'placeholder': 'exampleText' } ] | array
+| change / click / focus / blur etc. | fire event will run defined function | function
+| db         | defined store object | object
+| disabled | defined input is disabled or no | boolean
+| events | custom events. For example: [ { name: 'change', fn: () => {} } ] | array
+| index | When name is array, we can define index of input value | string/number
+| label      | defines text above the input - label | string
+| labelClass | defined class name of label. "ojsInput__label" by default | string
+| labelStyle | defined inline styles of label | string
+| name       | defined name that is declared in db | string
+| options    | options list for select: [ { text: 'Apple', value: 'apple' } ] | array
+| required   | defined select is required or no | boolean
+| selectClass | defined class name of select. "ojsSelect" by default | string
+| selectStyle | defined inline styles of select | string
+
+We also have defined methods for use on our select component like in button:
+* disabled
+* enabled
+```js
+// example: disable select component after select option
+const select = new oSelect({
+    text: 'Your favourite fruit?',
+    type: 'primary',
+    name: 'fruit',
+    db: store,
+    options: [
+        { text: 'Apple', value: 'apple'}
+        { text: 'Pear', value: 'pear'}
+    ]
+    change: () => select.disabled();
+    
+});
 ```
