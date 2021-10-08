@@ -1,6 +1,7 @@
 import o, { oRef } from 'ojs-core';
 import mapEvents from '../../utils/eventMapper';
 import './button.css';
+import generateRandomHash from '../../utils/generateRandomHash';
 
 const classNamesByTypeObject = {
     primary: ' ojsButton-primary',
@@ -16,7 +17,7 @@ const classNamesByTypeObject = {
 
 const buttonAttributesArray = store => [
     { name: 'type', val: store.submit ? 'submit' : 'button' },
-    { name: 'name', val: store.name },
+    { name: 'name', val: store.name || `ojsButton--${generateRandomHash()}` },
 ];
 
 class oButton {
@@ -33,10 +34,10 @@ class oButton {
         };
         this.buttonRef = oRef();
 
-        this.configMerge(config);
+        this.mergeConfig(config);
     }
 
-    configMerge(config) {
+    mergeConfig(config) {
         Object.assign(this.store, config);
         if (config.events) {
             this.store.events = [...config.events, ...mapEvents(config)];
