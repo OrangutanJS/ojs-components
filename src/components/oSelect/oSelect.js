@@ -7,15 +7,17 @@ class oSelect {
     constructor(config) {
         this.store = {
             attributes: [],
-            classNames: 'ojsSelect',
             db: '',
             events: [],
             disabled: false,
             label: '',
+            labelClass: 'ojsSelect',
+            labelStyle: false,
             name: '',
             options: [],
             required: false,
-            style: '',
+            selectClass: '',
+            selectStyle: false,
         };
         this.selectRef = oRef();
 
@@ -72,7 +74,7 @@ class oSelect {
 
     build() {
         const {
-            attributes, classNames, disabled, events, id, label, name, style,
+            attributes, disabled, events, id, label, labelClass, labelStyle, name, required, selectClass, selectStyle,
         } = this.store;
         const mappedOptions = this.mapOptions(this.store);
         const select = o('select')
@@ -81,17 +83,22 @@ class oSelect {
             .event(events)
             .ref(this.selectRef);
 
-        if (style) select.style(style);
+        if (selectStyle) select.style(selectStyle);
+        if (selectClass) select.class(selectClass);
         if (disabled) select.attr({ disabled });
+        if (required) select.attr({ required });
 
-        return o('label')
-            .class(classNames)
+        const oLabelElement = o('label')
+            .class(!labelStyle && labelClass)
             .add([
                 o('span').text(label).init(),
                 select.init(),
             ])
-            .id(id)
-            .init();
+            .id(id);
+
+        if (labelStyle) oLabelElement.style(labelStyle);
+
+        return oLabelElement.init();
     }
 
     init() {
