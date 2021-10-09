@@ -1,4 +1,4 @@
-import o from 'ojs-core';
+import o, { oRef } from 'ojs-core';
 import mapEvents from '../../utils/eventMapper';
 import generateRandomHash from '../../utils/generateRandomHash';
 import './input.css';
@@ -31,6 +31,7 @@ class oInput {
             inputStyle: false,
             attributes: [],
         };
+        this.inputRef = oRef();
 
         this.mergeConfig(config);
         this.store.id = config.id ? `${config.id}--ojsInput` : `ojsInput--${generateRandomHash()}`;
@@ -60,6 +61,14 @@ class oInput {
             },
         ];
         return defaultEvents.concat(mapEvents(config));
+    }
+
+    enabled() {
+        this.inputRef.target.disabled = false;
+    }
+
+    disabled() {
+        this.inputRef.target.disabled = true;
     }
 
     build() {

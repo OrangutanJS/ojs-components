@@ -49,6 +49,25 @@ Value in the store object will be replaced everytime when input value changes. A
 | placeholder | defined input placeholder | string
 | required | defined input is required or no | boolean
 | type       | defined type of input: text, number, password etc. text is declared by default | string
+
+We also have defined methods for use on our input component:
+* disabled
+* enabled
+
+```js
+// For example: disabled input when we typed something
+
+const input = new oInput({
+    label: 'Example Input',
+    type: 'text',
+    db: store,
+    name: 'example'
+    change: () => input.disabled(); 
+})
+
+// and enable when you want just by use: input.enabled()
+```
+
 ---
 * oButton
 ```js
@@ -164,3 +183,48 @@ const select = new oSelect({
     
 });
 ```
+---
+* oCheckbox
+
+example:
+```js
+// import
+import { oCheckbox } from 'ojs-components';
+
+// declaration 
+const store = {
+    'likeApples': false,
+}
+const checkbox = new oCheckbox({
+    label: 'I like apples',
+    name: 'likeApples',
+    db: store,
+    change: () => // do something,
+});
+
+// use
+document.body.appendChild(
+    checkbox.init()
+);
+```
+Properties list:
+
+| Property   |      description      | Type | 
+|:------------:|:---------------------:|:------:|
+| change / click / focus / blur etc. | fire event will run defined function | function
+| checkboxClass | defined class name of checkbox. | string |
+| checkboxStyle | defined inline styles of checkbox. | string |
+| db         | defined store object | object
+| disabled | defined input is disabled or no | boolean
+| events | custom events. For example: [ { name: 'change', fn: () => {} } ] | array
+| label      | defines text next to the checkbox - label | string
+| labelClass | defined class name of label. "ojsCheckbox__label" by default | string
+| labelStyle | defined inline styles of label | string
+| name       | defined name that is declared in db | string
+| required   | defined select is required or no | boolean
+| spanClass | defined class name of span. "ojsCheckbox__span" by default | string
+| spanStyle | defined inline styles of span | string
+
+We also have defined methods for use on our checkbox component like in others:
+* disabled
+* enabled
