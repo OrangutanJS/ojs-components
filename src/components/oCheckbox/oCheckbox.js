@@ -1,17 +1,19 @@
-import o from 'ojs-core';
+import o, { oRef } from 'ojs-core';
 import generateRandomHash from '../../utils/generateRandomHash';
 import mapEvents from '../../utils/eventMapper';
 import './checkbox.css';
 
 function oInputElement({
-    checkboxClass, checkboxStyle, db, events, name,
+    checkboxClass, checkboxStyle, db, disabled, events, name, required,
 }) {
     const input = o('input')
+        .disabled(disabled)
         .event(events)
         .type('checkbox')
         .name(name);
 
     if (db[name] === true) input.attr({ checked: 'true' });
+    if (required) input.attr({ required });
     if (checkboxClass) input.class(checkboxClass);
     if (checkboxStyle) input.style(checkboxStyle);
     return input;
@@ -28,16 +30,18 @@ class oCheckbox {
     constructor(config) {
         this.store = {
             db: '',
+            disabled: false,
             checkboxClass: '',
             checkboxStyle: '',
             label: '',
             labelClass: 'ojsCheckbox__label',
             labelStyle: '',
             name: '',
+            required: false,
             spanClass: 'ojsCheckbox__span',
             spanStyle: '',
-
         };
+        this.checkboxRef = oRef();
 
         this.mergeConfig(config);
         this.store.id = config.id ? `${config.id}--ojsCheckbox` : `ojsCheckbox--${generateRandomHash()}`;
@@ -63,6 +67,14 @@ class oCheckbox {
             },
         ];
         return defaultEvents.concat(mapEvents(config));
+    }
+
+    enabled() {
+        this.checkboxRef.target.disabled = false;
+    }
+
+    disabled() {
+        this.checkboxRef.target.disabled = true;
     }
 
     build() {
