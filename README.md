@@ -228,3 +228,58 @@ Properties list:
 We also have defined methods for use on our checkbox component like in others:
 * disabled
 * enabled
+---
+* oRadio
+
+```js
+// import
+import { oRadio } from 'ojs-components';
+
+// declaration 
+const store = {
+    'favouriteFruit': '',
+}
+
+const oRadioFirst = new oRadio({
+    label: 'Apple',
+    value: 'Apple',
+    name: 'favouriteFruit',
+    db: store,
+    change: () => // change function
+});
+const oRadioSecond = new oRadio({
+    label: 'Pear',
+    // if u don't add value property - input will set value = label, so here value will be Pear
+    name: 'favouriteFruit',
+    db: store,
+    change: () => // change function
+});
+
+// use
+document.body.appendChild(
+    oRadioFirst.init()
+    oRadioSecond.init()
+);
+```
+Properties list:
+
+| Property   |      description      | Type | 
+|:------------:|:---------------------:|:------:|
+| change / click / focus / blur etc. | fire event will run defined function | function
+| db         | defined store object | object
+| disabled | defined input is disabled or no | boolean
+| events | custom events. For example: [ { name: 'change', fn: () => {} } ] | array
+| label      | defines text next to the checkbox - label | string
+| labelClass | defined class name of label. "ojsCheckbox__label" by default | string
+| labelStyle | defined inline styles of label | string
+| name       | defined name that is declared in db | string
+| radioClass | defined class name of radio. | string |
+| radioStyle | defined inline styles of checkbox. | string |
+| required   | defined select is required or no | boolean
+| spanClass | defined class name of span. "ojsCheckbox__span" by default | string
+| spanStyle | defined inline styles of span | string
+| value | optional, if not defined value = label | string
+
+We also have defined methods for use on our checkbox component like in others:
+* disabled
+* enabled
