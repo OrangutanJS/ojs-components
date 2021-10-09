@@ -5,8 +5,9 @@ import './checkbox.css';
 
 function oInputElement({
     checkboxClass, checkboxStyle, db, disabled, events, name, required,
-}) {
+}, checkboxRef) {
     const input = o('input')
+        .ref(checkboxRef)
         .disabled(disabled)
         .event(events)
         .type('checkbox')
@@ -85,7 +86,7 @@ class oCheckbox {
         const oLabelElement = o('label').id(id)
             .class(!labelStyle && labelClass)
             .add([
-                oInputElement(this.store),
+                oInputElement(this.store, this.checkboxRef),
                 oSpanElement(this.store),
             ]);
 

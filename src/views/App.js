@@ -22,7 +22,6 @@ class App extends oView {
     components() {
         this.oInput = new oInput({
             label: 'Testujemy',
-            type: 'time',
             name: 'name',
             db: this.store,
             typeSpanText: true,
