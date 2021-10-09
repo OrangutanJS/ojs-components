@@ -1,22 +1,23 @@
 import o, { oRef } from 'ojs-core';
-import generateRandomHash from '../../utils/generateRandomHash';
 import mapEvents from '../../utils/eventMapper';
-import './checkbox.css';
+import generateRandomHash from '../../utils/generateRandomHash';
+import './radio.css';
 
 function oInputElement({
-    checkboxClass, checkboxStyle, db, disabled, events, name, required,
-}, checkboxRef) {
+    label, radioClass, radioStyle, db, disabled, events, name, required, value,
+}, ref) {
     const input = o('input')
-        .ref(checkboxRef)
+        .ref(ref)
         .disabled(disabled)
         .event(events)
-        .type('checkbox')
-        .name(name);
+        .type('radio')
+        .name(name)
+        .value(value || label);
 
-    if (db[name] === true) input.attr({ checked: 'true' });
+    if (db[name] === (value || label)) input.attr({ checked: 'true' });
     if (required) input.attr({ required });
-    if (checkboxClass) input.class(checkboxClass);
-    if (checkboxStyle) input.style(checkboxStyle);
+    if (radioClass) input.class(radioClass);
+    if (radioStyle) input.style(radioStyle);
     return input;
 }
 
@@ -27,25 +28,26 @@ function oSpanElement({ spanClass, spanStyle, label }) {
     return span;
 }
 
-class oCheckbox {
+class oRadio {
     constructor(config) {
         this.store = {
             db: '',
-            disabled: false,
-            checkboxClass: '',
-            checkboxStyle: '',
+            disabled: '',
             label: '',
-            labelClass: 'ojsCheckbox__label',
+            labelClass: 'ojsRadio__label',
             labelStyle: '',
             name: '',
-            required: false,
-            spanClass: 'ojsCheckbox__span',
+            radioClass: '',
+            radioStyle: '',
+            required: '',
+            spanClass: 'ojsRadio__span',
             spanStyle: '',
+            value: '',
         };
-        this.checkboxRef = oRef();
+        this.oRadioRef = oRef();
 
         this.mergeConfig(config);
-        this.store.id = config.id ? `${config.id}--ojsCheckbox` : `ojsCheckbox--${generateRandomHash()}`;
+        this.store.id = config.id ? `${config.id}--ojsRadio` : `ojsRadio--${generateRandomHash()}`;
     }
 
     mergeConfig(config) {
@@ -61,9 +63,9 @@ class oCheckbox {
         const defaultEvents = [
             {
                 name: 'change',
-                fn: ({ target: { checked, name } }) => {
+                fn: ({ target: { value, name } }) => {
                     const { db } = this.store;
-                    db[name] = checked;
+                    db[name] = value;
                 },
             },
         ];
@@ -71,31 +73,31 @@ class oCheckbox {
     }
 
     enabled() {
-        this.checkboxRef.target.disabled = false;
+        this.oRadioRef.target.disabled = false;
     }
 
     disabled() {
-        this.checkboxRef.target.disabled = true;
+        this.oRadioRef.target.disabled = true;
     }
 
     build() {
         const { id, labelClass, labelStyle } = this.store;
-
-        const oLabelElement = o('label').id(id)
+        const oLabelElement = o('label')
+            .id(id)
             .class(!labelStyle && labelClass)
             .add([
-                oInputElement(this.store, this.checkboxRef),
-                oSpanElement(this.store),
-            ]);
+                oInputElement(this.store, this.oRadioRef).init(),
+                oSpanElement(this.store).init(),
+            ])
+            .init();
 
         if (labelStyle) oLabelElement.style(labelStyle);
 
-        return oLabelElement.init();
+        return oLabelElement;
     }
 
     init() {
         return this.build();
     }
 }
-
-export default oCheckbox;
+export default oRadio;

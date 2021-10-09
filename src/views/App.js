@@ -4,6 +4,7 @@ import oInput from '../components/oInput/oInput';
 import oButton from '../components/oButton/oButton';
 import oSelect from '../components/oSelect/oSelect';
 import oCheckbox from '../components/oCheckbox/oCheckbox';
+import oRadio from '../components/oRadio/oRadio';
 
 class App extends oView {
     constructor() {
@@ -11,7 +12,8 @@ class App extends oView {
         this.store = {
             name: '',
             fruit: '',
-            checkbox_field: false,
+            checkbox_field: '',
+            radio_field: '',
             array: [
                 'witam',
                 'dwa',
@@ -99,6 +101,19 @@ class App extends oView {
             db: this.store,
             change: () => this.rerender(),
         });
+
+        this.oRadioFirst = new oRadio({
+            label: 'Apple',
+            name: 'radio_field',
+            db: this.store,
+            change: () => this.rerender(),
+        });
+        this.oRadioSecond = new oRadio({
+            label: 'Pear',
+            name: 'radio_field',
+            db: this.store,
+            change: () => this.rerender(),
+        });
     }
 
     build() {
@@ -124,6 +139,10 @@ class App extends oView {
             o('h2').text('Checkbox section:').init(),
             this.oCheckboxList.init(),
             o('p').text(`He likes apples? ${this.store.checkbox_field ? 'Yes' : 'No'}`),
+            o('h2').text('Radio section:').init(),
+            this.oRadioFirst.init(),
+            this.oRadioSecond.init(),
+            o('p').text(`He chose: ${this.store.radio_field}`),
         ]).init();
     }
 }

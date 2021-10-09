@@ -1,0 +1,11 @@
+.ojsRadio__label {
+    width: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ojsRadio__span {
+    font-weight: 700;
+    margin: 0.2rem;
+}
