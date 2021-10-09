@@ -3,6 +3,7 @@ import o from 'ojs-core';
 import oInput from '../components/oInput/oInput';
 import oButton from '../components/oButton/oButton';
 import oSelect from '../components/oSelect/oSelect';
+import oCheckbox from '../components/oCheckbox/oCheckbox';
 
 class App extends oView {
     constructor() {
@@ -10,6 +11,7 @@ class App extends oView {
         this.store = {
             name: '',
             fruit: '',
+            checkbox_field: false,
             array: [
                 'witam',
                 'dwa',
@@ -20,6 +22,7 @@ class App extends oView {
     components() {
         this.oInput = new oInput({
             label: 'Testujemy',
+            type: 'time',
             name: 'name',
             db: this.store,
             typeSpanText: true,
@@ -90,12 +93,21 @@ class App extends oView {
                 { text: 'Gruszka', value: 'pear' },
             ],
         });
+
+        this.oCheckboxList = new oCheckbox({
+            label: 'I like apples',
+            name: 'checkbox_field',
+            db: this.store,
+            change: () => this.rerender(),
+        });
     }
 
     build() {
         return o('div').style('width: 50%').add([
+            o('h2').text('Input section:').init(),
             this.oInput.init(),
-            o('h2').text('Buttons').init(),
+            o('p').text(this.store.name).init(),
+            o('h2').text('Buttons section:').init(),
             o('div').style('width: 900px; display: flex; flex-wrap: wrap; justify-content: center').add([
                 this.oButtonPrimary.init(),
                 this.oButtonSecondary.init(),
@@ -107,9 +119,12 @@ class App extends oView {
                 this.oButtonLinkConfirm.init(),
                 this.oButtonLinkCancel.init(),
             ]).init(),
+            o('h2').text('Select section:').init(),
             this.oSelect.init(),
-            o('p').text(this.store.name).init(),
             o('p').text(`Ulubiony owoc: ${this.store.fruit}`).init(),
+            o('h2').text('Checkbox section:').init(),
+            this.oCheckboxList.init(),
+            o('p').text(`He likes apples? ${this.store.checkbox_field ? 'Yes' : 'No'}`),
         ]).init();
     }
 }
