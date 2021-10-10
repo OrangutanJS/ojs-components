@@ -78,6 +78,10 @@ class OCheckbox {
         this.checkboxRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     build() {
         const { id, labelClass, labelStyle } = this.store;
 

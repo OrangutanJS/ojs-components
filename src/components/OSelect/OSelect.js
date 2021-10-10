@@ -59,6 +59,10 @@ class OSelect {
         this.selectRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     mapOptions(store) {
         const { db, name, options } = store;
         options.unshift({ text: '', value: '', blank: true });

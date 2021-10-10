@@ -80,6 +80,10 @@ class ORadio {
         this.oRadioRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     build() {
         const { id, labelClass, labelStyle } = this.store;
         const oLabelElement = o('label')

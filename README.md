@@ -53,6 +53,7 @@ Value in the store object will be replaced everytime when input value changes. A
 We also have defined methods for use on our input component:
 * disabled
 * enabled
+* getId
 
 ```js
 // For example: disabled input when we typed something
@@ -105,6 +106,7 @@ We also have defined methods for use on our button component:
 * textToggle
 * disabled
 * enabled
+* getId
 ```js
 // For example, change text from On to Off when we clicking button
 
@@ -168,6 +170,7 @@ OSelect like others need one argument: configObject. There are list of propertie
 We also have defined methods for use on our select component like in button:
 * disabled
 * enabled
+* getId
 ```js
 // example: disable select component after select option
 const select = new OSelect({
@@ -228,6 +231,7 @@ Properties list:
 We also have defined methods for use on our checkbox component like in others:
 * disabled
 * enabled
+* getId
 ---
 * ORadio
 
@@ -283,3 +287,4 @@ Properties list:
 We also have defined methods for use on our checkbox component like in others:
 * disabled
 * enabled
+* getId

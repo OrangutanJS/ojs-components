@@ -35,6 +35,7 @@ class OButton {
         this.buttonRef = oRef();
 
         this.mergeConfig(config);
+        this.store.id = config.id ? `${config.id}--ojsButton` : `ojsButton--${generateRandomHash()}`;
     }
 
     mergeConfig(config) {
@@ -62,6 +63,10 @@ class OButton {
 
     disabled() {
         this.buttonRef.target.disabled = true;
+    }
+
+    getId() {
+        return this.store.id;
     }
 
     build() {

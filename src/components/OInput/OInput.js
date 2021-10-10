@@ -71,6 +71,10 @@ class OInput {
         this.inputRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     build() {
         const {
             attributes, labelClass, db, disabled, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, required, type, typeSpanText,
