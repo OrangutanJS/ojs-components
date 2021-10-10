@@ -2,12 +2,21 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.js',
+    entry: {
+        OInput: './src/components/OInput/OInput',
+        OButton: './src/components/OButton/OButton',
+        OSelect: './src/components/OSelect/OSelect',
+        OCheckbox: './src/components/OCheckbox/OCheckbox',
+        ORadio: './src/components/ORadio/ORadio',
+    },
     output: {
-        path: path.resolve(__dirname, '../public'),
-        filename: 'components.js',
-        libraryExport: 'default',
-        libraryTarget: 'umd',
+        path: path.resolve(__dirname, '../npm/components'),
+        filename: '[name].js',
+        library: {
+            export: 'default',
+            name: '[name]',
+            type: 'umd',
+        },
     },
     module: {
         rules: [

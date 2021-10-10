@@ -20,7 +20,7 @@ const buttonAttributesArray = store => [
     { name: 'name', val: store.name || `ojsButton--${generateRandomHash()}` },
 ];
 
-class oButton {
+class OButton {
     constructor(config) {
         this.store = {
             attributes: [],
@@ -88,4 +88,4 @@ class oButton {
     }
 }
 
-export default oButton;
+export default OButton;

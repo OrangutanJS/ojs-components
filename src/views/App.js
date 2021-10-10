@@ -1,10 +1,14 @@
 import oView from 'ojs-view';
 import o from 'ojs-core';
-import oInput from '../components/oInput/oInput';
-import oButton from '../components/oButton/oButton';
-import oSelect from '../components/oSelect/oSelect';
-import oCheckbox from '../components/oCheckbox/oCheckbox';
-import oRadio from '../components/oRadio/oRadio';
+// import oButton from '../components/oButton/oButton';
+// import oSelect from '../components/oSelect/oSelect';
+import { OButton, OInput, OSelect } from 'ojs-components';
+import OCheckbox from '../components/OCheckbox/OCheckbox';
+import ORadio from '../components/ORadio/ORadio';
+// import { oButton, oInput, oSelect } from '../../npm';
+// console.log('input: ', oInput, 'button: ');
+
+console.log('oInput', OInput);
 
 class App extends oView {
     constructor() {
@@ -22,7 +26,7 @@ class App extends oView {
     }
 
     components() {
-        this.oInput = new oInput({
+        this.oInput = new OInput({
             label: 'Testujemy',
             name: 'name',
             db: this.store,
@@ -37,8 +41,9 @@ class App extends oView {
             change: () => this.rerender(),
             input: () => console.log('input'),
         });
+        console.log(this.oInput.init());
 
-        this.oButtonPrimary = new oButton({
+        this.oButtonPrimary = new OButton({
             text: 'Primary',
             name: 'witam',
             type: 'primary',
@@ -48,40 +53,40 @@ class App extends oView {
             // click: () => this.rerender(),
         });
 
-        this.oButtonSecondary = new oButton({
+        this.oButtonSecondary = new OButton({
             text: 'Secondary',
             type: 'secondary',
         });
-        this.oButtonPrimaryConfirm = new oButton({
+        this.oButtonPrimaryConfirm = new OButton({
             text: 'Primary confirm',
             type: 'primary-confirm',
         });
-        this.oButtonSecondaryConfirm = new oButton({
+        this.oButtonSecondaryConfirm = new OButton({
             text: 'Secondary confirm',
             type: 'secondary-confirm',
         });
-        this.oButtonPrimaryCancel = new oButton({
+        this.oButtonPrimaryCancel = new OButton({
             text: 'Primary cancel',
             type: 'primary-cancel',
         });
-        this.oButtonSecondaryCancel = new oButton({
+        this.oButtonSecondaryCancel = new OButton({
             text: 'Secondary cancel',
             type: 'secondary-cancel',
         });
-        this.oButtonLink = new oButton({
+        this.oButtonLink = new OButton({
             text: 'Link',
             type: 'link',
         });
-        this.oButtonLinkConfirm = new oButton({
+        this.oButtonLinkConfirm = new OButton({
             text: 'Link confirm',
             type: 'link-confirm',
         });
-        this.oButtonLinkCancel = new oButton({
+        this.oButtonLinkCancel = new OButton({
             text: 'Link cancel',
             type: 'link-cancel',
         });
 
-        this.oSelect = new oSelect({
+        this.oSelect = new OSelect({
             label: 'Twój ulubiony owoc',
             name: 'fruit',
             db: this.store,
@@ -95,20 +100,20 @@ class App extends oView {
             ],
         });
 
-        this.oCheckboxList = new oCheckbox({
+        this.oCheckboxList = new OCheckbox({
             label: 'I like apples',
             name: 'checkbox_field',
             db: this.store,
             change: () => this.rerender(),
         });
 
-        this.oRadioFirst = new oRadio({
+        this.oRadioFirst = new ORadio({
             label: 'Apple',
             name: 'radio_field',
             db: this.store,
             change: () => this.rerender(),
         });
-        this.oRadioSecond = new oRadio({
+        this.oRadioSecond = new ORadio({
             label: 'Pear',
             name: 'radio_field',
             db: this.store,
@@ -119,7 +124,7 @@ class App extends oView {
     build() {
         return o('div').style('width: 50%').add([
             o('h2').text('Input section:').init(),
-            this.oInput.init(),
+            this.oInput,
             o('p').text(this.store.name).init(),
             o('h2').text('Buttons section:').init(),
             o('div').style('width: 900px; display: flex; flex-wrap: wrap; justify-content: center').add([

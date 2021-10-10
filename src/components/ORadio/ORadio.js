@@ -28,7 +28,7 @@ function oSpanElement({ spanClass, spanStyle, label }) {
     return span;
 }
 
-class oRadio {
+class ORadio {
     constructor(config) {
         this.store = {
             db: '',
@@ -100,4 +100,4 @@ class oRadio {
         return this.build();
     }
 }
-export default oRadio;
+export default ORadio;

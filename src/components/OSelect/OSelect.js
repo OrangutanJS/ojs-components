@@ -3,7 +3,7 @@ import mapEvents from '../../utils/eventMapper';
 import generateRandomHash from '../../utils/generateRandomHash';
 import './select.css';
 
-class oSelect {
+class OSelect {
     constructor(config) {
         this.store = {
             attributes: [],
@@ -106,4 +106,4 @@ class oSelect {
     }
 }
 
-export default oSelect;
+export default OSelect;

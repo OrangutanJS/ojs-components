@@ -27,7 +27,7 @@ function oSpanElement({ spanClass, spanStyle, label }) {
     return span;
 }
 
-class oCheckbox {
+class OCheckbox {
     constructor(config) {
         this.store = {
             db: '',
@@ -98,4 +98,4 @@ class oCheckbox {
     }
 }
 
-export default oCheckbox;
+export default OCheckbox;

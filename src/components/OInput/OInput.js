@@ -15,7 +15,7 @@ const TYPES = {
     url: 'URL field',
 };
 
-class oInput {
+class OInput {
     constructor(config) {
         this.store = {
             label: '',
@@ -113,4 +113,4 @@ class oInput {
     }
 }
 
-export default oInput;
+export default OInput;

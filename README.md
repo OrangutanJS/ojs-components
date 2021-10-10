@@ -5,17 +5,17 @@ Module with ready to use components. Like input, button, select and more
 npm i ojs-components
 ```
 ##### Components:
-* oInput
+* OInput
 
 ```js
 // import 
-import { oInput } from 'ojs-components';
+import { OInput } from 'ojs-components';
 
 // declaration
 const store = {
     example: ''
 }
-const input = new oInput({
+const input = new OInput({
     label: 'Example Input',
     type: 'text',
     db: store,
@@ -28,7 +28,7 @@ document.body.appendChild(
     input.init()
 );
 ```
-oInput needs only one argument: configObject with properties
+OInput needs only one argument: configObject with properties
 
 Value in the store object will be replaced everytime when input value changes. Attribute value is defined as store['example']. When we type something in input like: 'hello', result will be: store['example'] = 'hello'
 
@@ -57,7 +57,7 @@ We also have defined methods for use on our input component:
 ```js
 // For example: disabled input when we typed something
 
-const input = new oInput({
+const input = new OInput({
     label: 'Example Input',
     type: 'text',
     db: store,
@@ -69,13 +69,13 @@ const input = new oInput({
 ```
 
 ---
-* oButton
+* OButton
 ```js
 // import
-import { oButton } from 'ojs-components';
+import { OButton } from 'ojs-components';
 
 // declaration 
-const button = new oButton({
+const button = new OButton({
     text: 'Example button',
     type: 'primary',
     click: () => {
@@ -88,7 +88,7 @@ document.body.appendChild(
     button.init()
 );
 ```
-oButton like oInput need one argument: configObject. There are list of properties:
+OButton like OInput need one argument: configObject. There are list of properties:
 
 | Property     |      description      | Type   |
 |:------------:|:---------------------:|:------:|
@@ -108,7 +108,7 @@ We also have defined methods for use on our button component:
 ```js
 // For example, change text from On to Off when we clicking button
 
-const button = new oButton({
+const button = new OButton({
     text: 'On',
     type: 'primary',
     click: () => {
@@ -121,16 +121,16 @@ const button = new oButton({
 // and enable when you want just by use: button.enabled()
 ```
 ---
-* oSelect
+* OSelect
 ```js
 // import
-import { oSelect } from 'ojs-components';
+import { OSelect } from 'ojs-components';
 
 // declaration 
 const store = {
     fruit: ''
 }
-const select = new oSelect({
+const select = new OSelect({
     text: 'Your favourite fruit?',
     type: 'primary',
     name: 'fruit',
@@ -146,7 +146,7 @@ document.body.appendChild(
     select.init()
 );
 ```
-oSelect like others need one argument: configObject. There are list of properties:
+OSelect like others need one argument: configObject. There are list of properties:
 
 | Property   |      description      | Type |
 |:------------:|:---------------------:|:------:|
@@ -170,7 +170,7 @@ We also have defined methods for use on our select component like in button:
 * enabled
 ```js
 // example: disable select component after select option
-const select = new oSelect({
+const select = new OSelect({
     text: 'Your favourite fruit?',
     type: 'primary',
     name: 'fruit',
@@ -184,18 +184,18 @@ const select = new oSelect({
 });
 ```
 ---
-* oCheckbox
+* OCheckbox
 
 example:
 ```js
 // import
-import { oCheckbox } from 'ojs-components';
+import { OCheckbox } from 'ojs-components';
 
 // declaration 
 const store = {
     'likeApples': false,
 }
-const checkbox = new oCheckbox({
+const checkbox = new OCheckbox({
     label: 'I like apples',
     name: 'likeApples',
     db: store,
@@ -229,25 +229,25 @@ We also have defined methods for use on our checkbox component like in others:
 * disabled
 * enabled
 ---
-* oRadio
+* ORadio
 
 ```js
 // import
-import { oRadio } from 'ojs-components';
+import { ORadio } from 'ojs-components';
 
 // declaration 
 const store = {
     'favouriteFruit': '',
 }
 
-const oRadioFirst = new oRadio({
+const oRadioFirst = new ORadio({
     label: 'Apple',
     value: 'Apple',
     name: 'favouriteFruit',
     db: store,
     change: () => // change function
 });
-const oRadioSecond = new oRadio({
+const oRadioSecond = new ORadio({
     label: 'Pear',
     // if u don't add value property - input will set value = label, so here value will be Pear
     name: 'favouriteFruit',
