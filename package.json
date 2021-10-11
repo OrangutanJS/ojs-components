@@ -1,6 +1,6 @@
 {
   "name": "ojs-components",
-  "version": "1.6.12",
+  "version": "1.6.13",
   "description": "Module with ready to use components",
   "main": "npm/index.js",
   "scripts": {
