@@ -20,7 +20,7 @@ const buttonAttributesArray = store => [
     { name: 'name', val: store.name || `ojsButton--${generateRandomHash()}` },
 ];
 
-class oButton {
+class OButton {
     constructor(config) {
         this.store = {
             attributes: [],
@@ -35,6 +35,7 @@ class oButton {
         this.buttonRef = oRef();
 
         this.mergeConfig(config);
+        this.store.id = config.id ? `${config.id}--ojsButton` : `ojsButton--${generateRandomHash()}`;
     }
 
     mergeConfig(config) {
@@ -64,6 +65,10 @@ class oButton {
         this.buttonRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     build() {
         this.addClassNamesByType();
         const {
@@ -88,4 +93,4 @@ class oButton {
     }
 }
 
-export default oButton;
+export default OButton;

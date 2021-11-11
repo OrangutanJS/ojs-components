@@ -15,7 +15,7 @@ const TYPES = {
     url: 'URL field',
 };
 
-class oInput {
+class OInput {
     constructor(config) {
         this.store = {
             label: '',
@@ -71,6 +71,10 @@ class oInput {
         this.inputRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     build() {
         const {
             attributes, labelClass, db, disabled, id, inputClass, inputStyle, index, label, labelStyle, name, placeholder, required, type, typeSpanText,
@@ -113,4 +117,4 @@ class oInput {
     }
 }
 
-export default oInput;
+export default OInput;

@@ -3,7 +3,7 @@ import mapEvents from '../../utils/eventMapper';
 import generateRandomHash from '../../utils/generateRandomHash';
 import './select.css';
 
-class oSelect {
+class OSelect {
     constructor(config) {
         this.store = {
             attributes: [],
@@ -59,6 +59,10 @@ class oSelect {
         this.selectRef.target.disabled = true;
     }
 
+    getId() {
+        return this.store.id;
+    }
+
     mapOptions(store) {
         const { db, name, options } = store;
         options.unshift({ text: '', value: '', blank: true });
@@ -106,4 +110,4 @@ class oSelect {
     }
 }
 
-export default oSelect;
+export default OSelect;
