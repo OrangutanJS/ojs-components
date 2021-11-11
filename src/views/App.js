@@ -1,14 +1,9 @@
 import oView from 'ojs-view';
 import o from 'ojs-core';
-// import oButton from '../components/oButton/oButton';
-// import oSelect from '../components/oSelect/oSelect';
-import { OButton, OInput, OSelect } from 'ojs-components';
-import OCheckbox from '../components/OCheckbox/OCheckbox';
-import ORadio from '../components/ORadio/ORadio';
-// import { oButton, oInput, oSelect } from '../../npm';
-// console.log('input: ', oInput, 'button: ');
 
-console.log('oInput', OInput);
+import {
+    OInput, OButton, OSelect, ORadio, OCheckbox,
+} from '../../npm/components';
 
 class App extends oView {
     constructor() {
