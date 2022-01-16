@@ -133,12 +133,11 @@ const store = {
     fruit: ''
 }
 const select = new OSelect({
-    text: 'Your favourite fruit?',
-    type: 'primary',
+    label: 'Your favourite fruit?',
     name: 'fruit',
     db: store,
     options: [
-        { text: 'Apple', value: 'apple'}
+        { text: 'Apple', value: 'apple'},
         { text: 'Pear', value: 'pear'}
     ]
 });
